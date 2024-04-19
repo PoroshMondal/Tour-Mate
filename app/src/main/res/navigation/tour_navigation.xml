@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tour_navigation"
+    app:startDestination="@id/launcherFragment">
+
+    <fragment
+        android:id="@+id/launcherFragment"
+        android:name="com.innovative.porosh.tourmate.ui.LauncherFragment"
+        android:label="fragment_launcher"
+        tools:layout="@layout/fragment_launcher" />
+    <fragment
+        android:id="@+id/newTourFragment"
+        android:name="com.innovative.porosh.tourmate.ui.NewTourFragment"
+        android:label="fragment_new_tour"
+        tools:layout="@layout/fragment_new_tour" />
+    <fragment
+        android:id="@+id/tourDetailsFragment"
+        android:name="com.innovative.porosh.tourmate.ui.TourDetailsFragment"
+        android:label="fragment_tour_details"
+        tools:layout="@layout/fragment_tour_details" />
+    <fragment
+        android:id="@+id/nav_weather"
+        android:name="com.innovative.porosh.tourmate.ui.WeatherFragment"
+        android:label="fragment_nav_weather"
+        tools:layout="@layout/fragment_weather" />
+    <fragment
+        android:id="@+id/nav_maps"
+        android:name="com.innovative.porosh.tourmate.ui.MapsFragment"
+        android:label="fragment_nav_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.innovative.porosh.tourmate.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/nav_tour"
+        android:name="com.innovative.porosh.tourmate.ui.TourFragment"
+        android:label="fragment_tour"
+        tools:layout="@layout/fragment_tour" />
+</navigation>
