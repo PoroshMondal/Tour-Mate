@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlinKapt)
     alias(libs.plugins.daggerHilt)
     alias(libs.plugins.gooleServicesPlugin)
+    alias(libs.plugins.mapsPlatformPlugin)
 }
 
 android {
@@ -44,6 +45,22 @@ android {
     kapt {
         correctErrorTypes = true
     }
+
+    secrets {
+        // Optionally specify a different file name containing your secrets.
+        // The plugin defaults to "local.properties"
+        propertiesFileName = "secrets.properties"
+
+        // A properties file containing default secret values. This file can be
+        // checked in version control.
+        defaultPropertiesFileName = "local.defaults.properties"
+
+        // Configure which keys should be ignored by the plugin by providing regular expressions.
+        // "sdk.dir" is ignored by default.
+        ignoreList.add("keyToIgnore") // Ignore the key "keyToIgnore"
+        ignoreList.add("sdk.*")       // Ignore all keys matching the regexp "sdk.*"
+    }
+
 }
 
 dependencies {
@@ -70,6 +87,9 @@ dependencies {
 
     //noinspection KaptUsageInsteadOfKsp
     //kapt(libs.androidx.room.compiler)
+
+    // Maps SDK
+    implementation(libs.google.maps.sdk)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
