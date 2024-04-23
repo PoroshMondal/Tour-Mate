@@ -3,13 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tour_navigation"
-    app:startDestination="@id/nav_maps">
+    app:startDestination="@id/launcherFragment">
 
     <fragment
         android:id="@+id/launcherFragment"
         android:name="com.innovative.porosh.tourmate.ui.LauncherFragment"
         android:label="fragment_launcher"
-        tools:layout="@layout/fragment_launcher" />
+        tools:layout="@layout/fragment_launcher" >
+        <action
+            android:id="@+id/tour_list_action"
+            app:destination="@id/nav_tour"
+            app:popUpTo="@id/launcherFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/login_action"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/launcherFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/newTourFragment"
         android:name="com.innovative.porosh.tourmate.ui.NewTourFragment"
