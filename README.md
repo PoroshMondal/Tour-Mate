@@ -24,3 +24,9 @@ Tour Mate is a simple application developed using Kotlin and the latest Android 
 
 ## Dependency Injection (DI)
 - Android Hilt library used to make the class independent to it's dependencies
+
+### Note 
+To use Google Map functionality, need to create two files and an Google Map API key from google console 
+Files are -
+    - secrets.properties
+    - local.defaults.properties
