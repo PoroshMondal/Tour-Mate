@@ -45,10 +45,20 @@
         android:id="@+id/loginFragment"
         android:name="com.innovative.porosh.tourmate.ui.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/login_to_tour_action"
+            app:destination="@id/nav_tour"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/nav_tour"
         android:name="com.innovative.porosh.tourmate.ui.TourFragment"
         android:label="fragment_tour"
-        tools:layout="@layout/fragment_tour" />
+        tools:layout="@layout/fragment_tour" >
+        <action
+            android:id="@+id/new_tour_action"
+            app:destination="@id/newTourFragment" />
+    </fragment>
 </navigation>
