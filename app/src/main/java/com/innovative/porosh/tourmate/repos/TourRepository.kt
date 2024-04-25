@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.toObject
 import com.innovative.porosh.tourmate.model.TourModel
 
 class TourRepository {
@@ -37,6 +38,20 @@ class TourRepository {
 
     fun getToursByUser(userId: String) : LiveData<List<TourModel>> {
         val tourListLiveData = MutableLiveData<List<TourModel>>()
+
+        db.collection(collection_tour)
+            .whereEqualTo("userId",userId)
+            .addSnapshotListener { value, error ->
+            if (error !=null){
+                return@addSnapshotListener
+            }
+
+            val temp = ArrayList<TourModel>()
+            for (doc in value!!){
+                temp.add(doc.toObject(TourModel::class.java))
+            }
+            tourListLiveData.postValue(temp)
+        }
 
         return tourListLiveData
     }
