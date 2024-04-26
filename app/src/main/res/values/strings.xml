@@ -37,4 +37,9 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="cnt_des_tour_float_button">Tour Float Button</string>
+    <string name="add_expense_title">Add Expense</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="expense_list">Expense List</string>
+    <string name="close">Close</string>
 </resources>

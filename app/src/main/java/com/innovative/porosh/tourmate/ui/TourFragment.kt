@@ -30,7 +30,9 @@ class TourFragment : Fragment() {
     ): View {
         binding = FragmentTourBinding.inflate(inflater,container,false)
         val adapter = TourAdapter { id, action, status ->
-
+            val navAction = TourFragmentDirections.tourDetailsAction()
+            navAction.tourId = id
+            findNavController().navigate(navAction)
         }
         binding.tourRecyclerView.layoutManager = LinearLayoutManager(activity)
         binding.tourRecyclerView.adapter = adapter

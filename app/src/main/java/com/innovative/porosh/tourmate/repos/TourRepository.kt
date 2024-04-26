@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
+import com.innovative.porosh.tourmate.data.model.ExpenseModel
 import com.innovative.porosh.tourmate.model.TourModel
 
 class TourRepository {
@@ -28,11 +29,23 @@ class TourRepository {
 
     }
 
-    /*fun addExpense(expenseModel: ExpenseModel, tourId: String) {
-
+    fun addExpense(expenseModel: ExpenseModel, tourId: String) {
+        Log.d("check", "Tour ID: $tourId")
+        val docRef = db.collection(collection_tour).document(tourId)
+            .collection(collection_expense)
+            .document()
+        Log.d("check", "Expense ID: ${docRef.id}")
+        expenseModel.expenseId = docRef.id
+        docRef.set(expenseModel)
+            .addOnSuccessListener {
+                Log.d("check","expense db snapshot success")
+            }
+            .addOnFailureListener {
+                Log.d("check","expense db snapshot failed")
+            }
     }
 
-    fun addMoment(momentModel: MomentModel, tourId: String) {
+    /*fun addMoment(momentModel: MomentModel, tourId: String) {
 
     }*/
 
@@ -59,16 +72,39 @@ class TourRepository {
     fun getTourById(tourId: String) : LiveData<TourModel> {
         val tourLiveData = MutableLiveData<TourModel>()
 
+        db.collection(collection_tour).document(tourId)
+            .addSnapshotListener { value, error ->
+                if (error !=null){
+                    return@addSnapshotListener
+                }
+                tourLiveData.postValue(value!!.toObject(TourModel::class.java))
+            }
+
         return tourLiveData
     }
 
-    /*fun getExpenses(tourId: String) : LiveData<List<ExpenseModel>> {
-        val tourListLiveData = MutableLiveData<List<ExpenseModel>>()
+    fun getExpenses(tourId: String) : LiveData<List<ExpenseModel>> {
+        val expenseListLiveData = MutableLiveData<List<ExpenseModel>>()
 
-        return tourListLiveData
+        db.collection(collection_tour).document(tourId)
+            .collection(collection_expense)
+            .addSnapshotListener { value, error ->
+                if (error!=null){
+                    return@addSnapshotListener
+                }
+
+                val temp = ArrayList<ExpenseModel>()
+                for (doc in value!!){
+                    temp.add(doc.toObject(ExpenseModel::class.java))
+                }
+
+                expenseListLiveData.postValue(temp)
+            }
+
+        return expenseListLiveData
     }
 
-    fun getMoments(tourId: String) : LiveData<List<MomentModel>> {
+    /*fun getMoments(tourId: String) : LiveData<List<MomentModel>> {
         val tourListLiveData = MutableLiveData<List<MomentModel>>()
 
         return tourListLiveData

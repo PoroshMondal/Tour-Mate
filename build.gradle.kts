@@ -6,5 +6,6 @@ plugins {
     alias(libs.plugins.daggerHilt) apply false
     alias(libs.plugins.gooleServicesPlugin) apply false
     alias(libs.plugins.mapsPlatformPlugin) apply false
+    alias(libs.plugins.safeArgsPlugin) apply false
 }
 

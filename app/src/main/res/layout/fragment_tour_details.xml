@@ -4,9 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <!--<variable
+        <variable
             name="tourModel"
-            type="com.seip.android.tourmatestarterapp.model.TourModel" />-->
+            type="com.innovative.porosh.tourmate.model.TourModel" />
         <variable
             name="totalExpense"
             type="Integer" />
@@ -43,8 +43,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:text="@{tourModel.title}"
                     tools:text="Tour Name" />
-                <!-- android:text="@{tourModel.title}"
+                <!--
                 android:fontFamily="sans-serif-black"
                  -->
 
@@ -54,9 +55,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:text="@{tourModel.destination}"
                     tools:text="Destination" />
                 <!-- android:fontFamily="sans-serif-black"
-                    android:text="@{tourModel.destination}" -->
+                 -->
 
                 <TextView
                     android:id="@+id/detailsTourBudgetTV"
@@ -64,9 +66,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
+                    android:text="@{`BDT `+String.valueOf(tourModel.budget)}"
                     tools:text="BDT 25000" />
                 <!-- android:fontFamily="sans-serif-black"
-                    android:text="@{`BDT`+String.valueOf(tourModel.budget)}" -->
+                   -->
 
             </LinearLayout>
 
@@ -115,9 +118,10 @@
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/detailsTotalExpenseTitleTV"
                     android:textColor="@color/white"
+                    android:text="@{`BDT `+String.valueOf(totalExpense)}"
                     tools:text="BDT 5000" />
                 <!-- android:fontFamily="sans-serif-black"
-                    android:text="@{`BDT`+String.valueOf(totalExpense)}" -->
+                   -->
 
                 <TextView
                     android:id="@+id/detailsRemainingBudgetTitleTV"
@@ -138,9 +142,10 @@
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/detailsRemainingBudgetTitleTV"
                     android:textColor="@color/white"
+                    android:text="@{`BDT `+String.valueOf(tourModel.budget - totalExpense)}"
                     tools:text="BDT 20000" />
                 <!-- android:fontFamily="sans-serif-black"
-                    android:text="@{`BDT`+String.valueOf(tourModel.budget - totalExpense)}" -->
+                   -->
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/detailsAddExpenseBtn"

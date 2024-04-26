@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.daggerHilt)
     alias(libs.plugins.gooleServicesPlugin)
     alias(libs.plugins.mapsPlatformPlugin)
+    alias(libs.plugins.safeArgsPlugin)
 }
 
 android {

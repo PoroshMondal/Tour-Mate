@@ -30,7 +30,13 @@
         android:id="@+id/tourDetailsFragment"
         android:name="com.innovative.porosh.tourmate.ui.TourDetailsFragment"
         android:label="fragment_tour_details"
-        tools:layout="@layout/fragment_tour_details" />
+        tools:layout="@layout/fragment_tour_details" >
+        <argument
+            android:name="tourId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="null" />
+    </fragment>
     <fragment
         android:id="@+id/nav_weather"
         android:name="com.innovative.porosh.tourmate.ui.WeatherFragment"
@@ -60,5 +66,8 @@
         <action
             android:id="@+id/new_tour_action"
             app:destination="@id/newTourFragment" />
+        <action
+            android:id="@+id/tour_details_action"
+            app:destination="@id/tourDetailsFragment" />
     </fragment>
 </navigation>
