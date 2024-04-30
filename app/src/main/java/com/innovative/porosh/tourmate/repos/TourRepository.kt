@@ -7,6 +7,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import com.google.firebase.firestore.toObject
 import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.MomentModel
 import com.innovative.porosh.tourmate.model.TourModel
 
 class TourRepository {
@@ -45,9 +46,17 @@ class TourRepository {
             }
     }
 
-    /*fun addMoment(momentModel: MomentModel, tourId: String) {
-
-    }*/
+    fun addMoment(momentModel: MomentModel, tourId: String) {
+        val docRef = db.collection(collection_tour).document(tourId)
+            .collection(collection_photos)
+            .document()
+        momentModel.momentId = docRef.id
+        docRef.set(momentModel).addOnSuccessListener {
+            Log.d("check","add photo db snapshot success")
+        }.addOnFailureListener {
+            Log.d("check","add photo db snapshot success")
+        }
+    }
 
     fun getToursByUser(userId: String) : LiveData<List<TourModel>> {
         val tourListLiveData = MutableLiveData<List<TourModel>>()

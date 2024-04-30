@@ -1,10 +1,17 @@
 package com.innovative.porosh.tourmate.ui
 
+import android.app.Activity
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.innovative.porosh.tourmate.R
@@ -19,7 +26,15 @@ class TourDetailsFragment : Fragment() {
     private lateinit var binding: FragmentTourDetailsBinding
     private val tourViewModel: TourViewModel by viewModels()
     private var tourId: String ?= null
+    private var tourName: String ?= null
     private var expenseList = listOf<ExpenseModel>()
+
+    private val cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
+        if (result.resultCode == Activity.RESULT_OK){
+            val bitmap = result.data?.extras?.get("data") as Bitmap
+            tourViewModel.uploadPhoto(bitmap = bitmap,tourId = tourId!!, tourName = tourName!!)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +52,7 @@ class TourDetailsFragment : Fragment() {
         tourId?.let {
             tourViewModel.getTourById(it).observe(viewLifecycleOwner){
                 binding.tourModel = it
+                tourName = it.title
             }
         }
 
@@ -58,6 +74,15 @@ class TourDetailsFragment : Fragment() {
 
         binding.detailsViewExpenseBtn.setOnClickListener {
             ShowExpenseListDialog(expenseList).show(childFragmentManager,"show_expense_list")
+        }
+
+        binding.captureImageBtn.setOnClickListener {
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            try {
+                cameraLauncher.launch(intent)
+            }catch (e: ActivityNotFoundException){
+                Log.e("error","message:" + e.message)
+            }
         }
 
         return binding.root

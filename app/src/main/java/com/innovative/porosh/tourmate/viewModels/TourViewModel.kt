@@ -2,9 +2,13 @@ package com.innovative.porosh.tourmate.viewModels
 
 import android.graphics.Bitmap
 import androidx.lifecycle.ViewModel
+import com.google.firebase.Firebase
+import com.google.firebase.storage.storage
 import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.MomentModel
 import com.innovative.porosh.tourmate.model.TourModel
 import com.innovative.porosh.tourmate.repos.TourRepository
+import java.io.ByteArrayOutputStream
 
 class TourViewModel: ViewModel() {
 
@@ -39,6 +43,32 @@ class TourViewModel: ViewModel() {
     }
 
     fun uploadPhoto(bitmap: Bitmap, tourId: String, tourName: String) {
+        val imageName = "${tourId}_${System.currentTimeMillis()}.jpg"
+        val photoRef = Firebase.storage.reference.child("$tourName/$imageName")
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG,75, baos)
+        val imageData= baos.toByteArray()
+        val uploadTask = photoRef.putBytes(imageData)
+        uploadTask.addOnSuccessListener {
+
+        }.addOnFailureListener{
+
+        }
+
+        val urlTask = uploadTask.continueWithTask{task ->
+            if (!task.isSuccessful){
+                task.exception?.let {
+                    throw it
+                }
+            }
+            photoRef.downloadUrl
+        }.addOnCompleteListener { task->
+            if (task.isSuccessful){
+                val downloadUri = task.result
+                val momentModel = MomentModel(imageName = imageName, imageUrl = downloadUri.toString())
+                repository.addMoment(momentModel,tourId)
+            }
+        }
 
     }
 }
