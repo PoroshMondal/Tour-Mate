@@ -17,8 +17,10 @@ import androidx.navigation.fragment.navArgs
 import com.innovative.porosh.tourmate.R
 import com.innovative.porosh.tourmate.customDialogs.AddExpenseDialog
 import com.innovative.porosh.tourmate.customDialogs.ShowExpenseListDialog
+import com.innovative.porosh.tourmate.customDialogs.ShowMomentListDialog
 import com.innovative.porosh.tourmate.data.model.ExpenseModel
 import com.innovative.porosh.tourmate.databinding.FragmentTourDetailsBinding
+import com.innovative.porosh.tourmate.model.MomentModel
 import com.innovative.porosh.tourmate.viewModels.TourViewModel
 
 class TourDetailsFragment : Fragment() {
@@ -28,6 +30,7 @@ class TourDetailsFragment : Fragment() {
     private var tourId: String ?= null
     private var tourName: String ?= null
     private var expenseList = listOf<ExpenseModel>()
+    private var momentList = listOf<MomentModel>()
 
     private val cameraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){result ->
         if (result.resultCode == Activity.RESULT_OK){
@@ -72,8 +75,19 @@ class TourDetailsFragment : Fragment() {
             }
         }
 
+        tourId?.let {
+            tourViewModel.getAllMoments(it).observe(viewLifecycleOwner){
+                momentList = it
+                binding.totalMoments = momentList.size
+            }
+        }
+
         binding.detailsViewExpenseBtn.setOnClickListener {
             ShowExpenseListDialog(expenseList).show(childFragmentManager,"show_expense_list")
+        }
+
+        binding.galleryBtn.setOnClickListener {
+            ShowMomentListDialog(momentList).show(childFragmentManager,"show_moment_list")
         }
 
         binding.captureImageBtn.setOnClickListener {

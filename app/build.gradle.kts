@@ -88,6 +88,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     kapt (libs.hilt.compiler)
 
+
+    //Glide
+    implementation(libs.glide)
+    annotationProcessor (libs.glide.compiler)
+
     //noinspection KaptUsageInsteadOfKsp
     //kapt(libs.androidx.room.compiler)
 

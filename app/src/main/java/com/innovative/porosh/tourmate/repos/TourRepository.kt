@@ -113,11 +113,26 @@ class TourRepository {
         return expenseListLiveData
     }
 
-    /*fun getMoments(tourId: String) : LiveData<List<MomentModel>> {
-        val tourListLiveData = MutableLiveData<List<MomentModel>>()
+    fun getMoments(tourId: String) : LiveData<List<MomentModel>> {
+        val momentListLiveData = MutableLiveData<List<MomentModel>>()
 
-        return tourListLiveData
-    }*/
+        db.collection(collection_tour).document(tourId)
+            .collection(collection_photos)
+            .addSnapshotListener{value, error ->
+                if (error!=null){
+                    return@addSnapshotListener
+                }
+
+                val temp = ArrayList<MomentModel>()
+                for (doc in value!!){
+                    temp.add(doc.toObject(MomentModel::class.java))
+                }
+
+                momentListLiveData.postValue(temp)
+            }
+
+        return momentListLiveData
+    }
 
     companion object {
         const val TAG = "db_error"

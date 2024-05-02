@@ -1,6 +1,7 @@
 package com.innovative.porosh.tourmate.viewModels
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
@@ -32,7 +33,7 @@ class TourViewModel: ViewModel() {
 
     fun getAllExpense(tourId: String) = repository.getExpenses(tourId)
 
-    //fun getAllMoments(tourId: String) = repository.getMoments(tourId)
+    fun getAllMoments(tourId: String) = repository.getMoments(tourId)
 
     fun getTotalExpense(list: List<ExpenseModel>) : Int {
         var total = 0
@@ -50,9 +51,9 @@ class TourViewModel: ViewModel() {
         val imageData= baos.toByteArray()
         val uploadTask = photoRef.putBytes(imageData)
         uploadTask.addOnSuccessListener {
-
+            Log.d("check","Photo uploaded success")
         }.addOnFailureListener{
-
+            Log.d("check","Photo uploaded failed")
         }
 
         val urlTask = uploadTask.continueWithTask{task ->

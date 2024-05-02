@@ -212,10 +212,11 @@
                     android:layout_below="@id/detailsMomentsHeaderTV"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@id/detailsTotalMomentsTV"
+                    android:text="@{String.valueOf(totalMoments)}"
                     android:textColor="@color/white"
                     tools:text="0" />
                 <!-- android:fontFamily="sans-serif-black"
-                    android:text="@{String.valueOf(totalMoments)}" -->
+                   -->
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/captureImageBtn"
