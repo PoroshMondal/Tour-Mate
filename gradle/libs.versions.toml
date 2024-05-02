@@ -22,6 +22,10 @@ lifecycleViewmodelKtx = "2.7.0"
 mapsPlatformPlugin = "2.0.1"
 googleMaps = "18.2.0"
 glideVersion = "4.16.0"
+playServicesLocation = "21.2.0"
+retrofitVersion = "2.11.0"
+converterMoshiVersion = "2.11.0"
+moshiVersion = "1.15.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,8 +49,12 @@ androidx-annotation = { group = "androidx.annotation", name = "annotation", vers
 androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 google-maps-sdk = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "googleMaps" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref =  "playServicesLocation" }
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glideVersion" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glideVersion" }
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
+retrofit2-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "converterMoshiVersion" }
+squareup-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshiVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

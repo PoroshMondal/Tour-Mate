@@ -88,6 +88,12 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     kapt (libs.hilt.compiler)
 
+    // Retrofit2
+    implementation(libs.squareup.retrofit)
+    implementation(libs.retrofit2.converter.moshi)
+
+    // Moshi
+    implementation(libs.squareup.moshi.kotlin)
 
     //Glide
     implementation(libs.glide)
@@ -95,6 +101,9 @@ dependencies {
 
     //noinspection KaptUsageInsteadOfKsp
     //kapt(libs.androidx.room.compiler)
+
+    // Location
+    implementation(libs.play.services.location)
 
     // Maps SDK
     implementation(libs.google.maps.sdk)

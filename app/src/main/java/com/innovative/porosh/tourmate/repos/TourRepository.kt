@@ -27,7 +27,12 @@ class TourRepository {
     }
 
     fun updateTourStatus(id: String, status: Boolean) {
-
+        val docRef = db.collection(collection_tour).document(id)
+        docRef.update(mapOf("completed" to status)).addOnSuccessListener {
+            Log.d("check","db snapshot update success")
+        }.addOnFailureListener {
+            Log.d("check","db snapshot update failed")
+        }
     }
 
     fun addExpense(expenseModel: ExpenseModel, tourId: String) {
