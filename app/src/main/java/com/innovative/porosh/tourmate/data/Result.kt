@@ -3,6 +3,7 @@ package com.innovative.porosh.tourmate.data
 /**
  * A generic class that holds a value with its loading status.
  * @param <T>
+ * This is class is not used yet
  */
 sealed class Result<out T : Any> {
 

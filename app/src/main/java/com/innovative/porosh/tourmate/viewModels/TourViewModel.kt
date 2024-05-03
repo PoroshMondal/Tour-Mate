@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.google.firebase.Firebase
 import com.google.firebase.storage.storage
-import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.ExpenseModel
 import com.innovative.porosh.tourmate.model.MomentModel
 import com.innovative.porosh.tourmate.model.TourModel
 import com.innovative.porosh.tourmate.repos.TourRepository

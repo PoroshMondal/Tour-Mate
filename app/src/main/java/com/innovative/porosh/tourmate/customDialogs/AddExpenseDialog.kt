@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.EditText
 import androidx.fragment.app.DialogFragment
 import com.innovative.porosh.tourmate.R
-import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.ExpenseModel
 
 class AddExpenseDialog(val callback: (ExpenseModel) -> Unit): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

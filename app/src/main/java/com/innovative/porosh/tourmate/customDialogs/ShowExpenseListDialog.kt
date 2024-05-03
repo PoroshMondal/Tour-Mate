@@ -3,13 +3,12 @@ package com.innovative.porosh.tourmate.customDialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.innovative.porosh.tourmate.R
 import com.innovative.porosh.tourmate.adapters.ExpenseAdapter
-import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.ExpenseModel
 
 class ShowExpenseListDialog(private val list: List<ExpenseModel>): DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

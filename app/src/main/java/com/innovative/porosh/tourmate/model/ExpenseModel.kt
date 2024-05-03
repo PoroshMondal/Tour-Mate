@@ -1,4 +1,4 @@
-package com.innovative.porosh.tourmate.data.model
+package com.innovative.porosh.tourmate.model
 
 import com.google.firebase.Timestamp
 

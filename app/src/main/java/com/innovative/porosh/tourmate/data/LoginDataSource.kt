@@ -4,6 +4,7 @@ import com.innovative.porosh.tourmate.data.model.LoggedInUser
 import java.io.IOException
 
 /**
+ * This class is not used yet
  * Class that handles authentication w/ login credentials and retrieves user information.
  */
 class LoginDataSource {

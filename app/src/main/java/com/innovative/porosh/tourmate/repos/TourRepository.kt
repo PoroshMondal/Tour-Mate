@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import com.google.firebase.firestore.toObject
-import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.ExpenseModel
 import com.innovative.porosh.tourmate.model.MomentModel
 import com.innovative.porosh.tourmate.model.TourModel
 

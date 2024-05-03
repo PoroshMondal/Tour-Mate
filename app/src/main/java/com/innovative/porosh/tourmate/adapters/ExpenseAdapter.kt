@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.ExpenseModel
 import com.innovative.porosh.tourmate.databinding.ExpenseRowItemBinding
 
 class ExpenseAdapter: ListAdapter<ExpenseModel, ExpenseAdapter.ExpenseViewHolder>(ExpenseDiffUtil()) {

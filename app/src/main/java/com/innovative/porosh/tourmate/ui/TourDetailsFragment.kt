@@ -14,11 +14,10 @@ import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.innovative.porosh.tourmate.R
 import com.innovative.porosh.tourmate.customDialogs.AddExpenseDialog
 import com.innovative.porosh.tourmate.customDialogs.ShowExpenseListDialog
 import com.innovative.porosh.tourmate.customDialogs.ShowMomentListDialog
-import com.innovative.porosh.tourmate.data.model.ExpenseModel
+import com.innovative.porosh.tourmate.model.ExpenseModel
 import com.innovative.porosh.tourmate.databinding.FragmentTourDetailsBinding
 import com.innovative.porosh.tourmate.model.MomentModel
 import com.innovative.porosh.tourmate.viewModels.TourViewModel
