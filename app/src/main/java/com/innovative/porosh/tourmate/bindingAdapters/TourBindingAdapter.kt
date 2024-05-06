@@ -3,6 +3,7 @@ package com.innovative.porosh.tourmate.bindingAdapters
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.google.firebase.Timestamp
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -15,7 +16,7 @@ fun setFormattedDate(tv: TextView, timestamp: Timestamp) {
     tv.text = "created on $formattedDate"
 }
 
-/*@BindingAdapter("app:setWeatherDate")
+@BindingAdapter("app:setWeatherDate")
 fun setFormattedWeatherDate(tv: TextView, date: Long) {
     val formattedDate = SimpleDateFormat("EEE, dd, yyyy", Locale.getDefault())
         .format(Date(date * 1000))
@@ -28,4 +29,4 @@ fun setWeatherIcon(iv: ImageView, icon: String?) {
         val url = "http://openweathermap.org/img/wn/${icon}@2x.png"
         Glide.with(iv).load(url).into(iv)
     }
-}*/
+}

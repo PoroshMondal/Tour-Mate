@@ -58,8 +58,9 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_conversion_absoluteHeight="24dp"
                 tools:layout_conversion_absoluteWidth="107dp"
+                app:setWeatherDate="@{current.dt}"
                 tools:text="SUN 11, 2021" />
-            <!-- app:setWeatherDate="@{current.dt}" -->
+            <!--  -->
 
             <TextView
                 android:id="@+id/weatherAddressTV"
@@ -72,8 +73,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/weatherDateTV"
                 tools:layout_conversion_absoluteHeight="35dp"
                 tools:layout_conversion_absoluteWidth="117dp"
+                android:text="@{current.name + `,`+ current.sys.country}"
                 tools:text="Dhaka, BD" />
-            <!-- android:text="@{current.name + `,`+ current.sys.country}" -->
+            <!--  -->
 
             <ImageView
                 android:id="@+id/weatherIconIV"
@@ -85,10 +87,11 @@
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/weatherFeelsLikeTV"
+                app:setWeatherIcon="@{current.weather[0].icon}"
                 tools:layout_conversion_absoluteHeight="70dp"
                 tools:layout_conversion_absoluteWidth="70dp"
                 tools:src="@mipmap/ic_launcher_round" />
-            <!-- app:setWeatherIcon="@{current.weather[0].icon}" -->
+            <!--  -->
 
             <TextView
                 android:id="@+id/weatherTempTV"
@@ -103,9 +106,10 @@
                 app:layout_constraintTop_toBottomOf="@+id/weatherAddressTV"
                 tools:layout_conversion_absoluteHeight="53dp"
                 tools:layout_conversion_absoluteWidth="60dp"
+                android:text="@{Math.round(current.main.temp)+`\u00B0`}"
                 tools:text="35\u00B0" />
             <!-- android:fontFamily="@font/roboto_mono_thin" -->
-            <!-- android:text="@{Math.round(current.main.temp)+`\u00B0`}" -->
+            <!--  -->
 
             <TextView
                 android:id="@+id/weatherFeelsLikeTV"
@@ -119,8 +123,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/weatherTempTV"
                 tools:layout_conversion_absoluteHeight="27dp"
                 tools:layout_conversion_absoluteWidth="119dp"
+                android:text="@{`Feels like:`+Math.round(current.main.feelsLike)+`\u00B0`}"
                 tools:text="feels like: 39\u00B0" />
-            <!-- android:text="@{`Feels like:`+Math.round(current.main.feelsLike)+`\u00B0`}" -->
+            <!--  -->
 
             <TextView
                 android:id="@+id/weatherConditionTV"
@@ -133,8 +138,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/weatherIconIV"
                 tools:layout_conversion_absoluteHeight="30dp"
                 tools:layout_conversion_absoluteWidth="47dp"
+                android:text="@{current.weather[0].description}"
                 tools:text="haze" />
-            <!-- android:text="@{current.weather[0].description}" -->
+            <!--  -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

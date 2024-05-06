@@ -13,12 +13,14 @@ import com.innovative.porosh.tourmate.databinding.FragmentWeatherBinding
 import com.innovative.porosh.tourmate.userLocation.isLocationPermissionGranted
 import com.innovative.porosh.tourmate.userLocation.requestLocationPermission
 import com.innovative.porosh.tourmate.viewModels.LocationViewModel
+import com.innovative.porosh.tourmate.viewModels.WeatherViewModel
 
 class WeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentWeatherBinding
     private lateinit var client: FusedLocationProviderClient
     private val locationViewModel: LocationViewModel by viewModels()
+    private val weatherViewModel: WeatherViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -31,7 +33,13 @@ class WeatherFragment : Fragment() {
         binding = FragmentWeatherBinding.inflate(inflater,container,false)
         locationViewModel.location.observe(viewLifecycleOwner){
             // here we will fetch the weather information using location(lat,long)
+            weatherViewModel.getWeatherData(it)
         }
+
+        weatherViewModel.current.observe(viewLifecycleOwner){
+            binding.current = it
+        }
+
         if (isLocationPermissionGranted(requireActivity())){
             detectUserLocation()
         }else{
