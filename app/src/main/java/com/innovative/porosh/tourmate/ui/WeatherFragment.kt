@@ -1,5 +1,7 @@
 package com.innovative.porosh.tourmate.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +12,8 @@ import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.innovative.porosh.tourmate.databinding.FragmentWeatherBinding
+import com.innovative.porosh.tourmate.prefs.getTempStatus
+import com.innovative.porosh.tourmate.prefs.setTempStatus
 import com.innovative.porosh.tourmate.userLocation.isLocationPermissionGranted
 import com.innovative.porosh.tourmate.userLocation.requestLocationPermission
 import com.innovative.porosh.tourmate.viewModels.LocationViewModel
@@ -21,6 +25,7 @@ class WeatherFragment : Fragment() {
     private lateinit var client: FusedLocationProviderClient
     private val locationViewModel: LocationViewModel by viewModels()
     private val weatherViewModel: WeatherViewModel by viewModels()
+    private lateinit var preferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -29,8 +34,13 @@ class WeatherFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        preferences = requireActivity().getSharedPreferences("weather_prefs",Context.MODE_PRIVATE)
         client = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding = FragmentWeatherBinding.inflate(inflater,container,false)
+
+        binding.tempSwitch.isChecked = getTempStatus(preferences)
+        weatherViewModel.tempStatus = getTempStatus(preferences)
+
         locationViewModel.location.observe(viewLifecycleOwner){
             // here we will fetch the weather information using location(lat,long)
             weatherViewModel.getWeatherData(it)
@@ -45,6 +55,13 @@ class WeatherFragment : Fragment() {
         }else{
             requestLocationPermission(requireActivity())
         }
+
+        binding.tempSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            setTempStatus(isChecked, preferences.edit())
+            weatherViewModel.tempStatus = isChecked
+            weatherViewModel.getWeatherData(locationViewModel.location.value!!)
+        }
+
         return binding.root
     }
 

@@ -8,7 +8,10 @@ import com.innovative.porosh.tourmate.network.weather_api_key
 class WeatherRepository {
 
     suspend fun fetchCurrentData(location: Location, tempStatus: Boolean): CurrentWeatherModel?{
-        val endUrl = "weather?lat=${location.latitude}&lon=${location.longitude}&units=metric&appid=$weather_api_key"
+        // imperial means temperature is in Fahrenheit
+        // metric means temperature is in celsius
+        val unit = if (tempStatus) "imperial" else "metric"
+        val endUrl = "weather?lat=${location.latitude}&lon=${location.longitude}&units=$unit&appid=$weather_api_key"
         val currentWeatherModel = WeatherApi.weatherServiceApi.getCurrentWeather(endUrl)
         return currentWeatherModel
     }
