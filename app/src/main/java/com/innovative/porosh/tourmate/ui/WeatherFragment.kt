@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -22,8 +24,7 @@ import com.innovative.porosh.tourmate.viewModels.WeatherViewModel
 class WeatherFragment : Fragment() {
 
     private lateinit var binding: FragmentWeatherBinding
-    private lateinit var client: FusedLocationProviderClient
-    private val locationViewModel: LocationViewModel by viewModels()
+    private val locationViewModel: LocationViewModel by activityViewModels()
     private val weatherViewModel: WeatherViewModel by viewModels()
     private lateinit var preferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,6 @@ class WeatherFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         preferences = requireActivity().getSharedPreferences("weather_prefs",Context.MODE_PRIVATE)
-        client = LocationServices.getFusedLocationProviderClient(requireActivity())
         binding = FragmentWeatherBinding.inflate(inflater,container,false)
 
         binding.tempSwitch.isChecked = getTempStatus(preferences)
@@ -50,12 +50,6 @@ class WeatherFragment : Fragment() {
             binding.current = it
         }
 
-        if (isLocationPermissionGranted(requireActivity())){
-            detectUserLocation()
-        }else{
-            requestLocationPermission(requireActivity())
-        }
-
         binding.tempSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
             setTempStatus(isChecked, preferences.edit())
             weatherViewModel.tempStatus = isChecked
@@ -63,29 +57,6 @@ class WeatherFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 999){
-            if (grantResults.contains(PackageManager.PERMISSION_GRANTED)){
-                detectUserLocation()
-            }else{
-                // show a meaningful info in dialog
-            }
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    private fun detectUserLocation() {
-        client.lastLocation.addOnSuccessListener {
-            locationViewModel.setNewLocation(it)
-        }
     }
 
 }

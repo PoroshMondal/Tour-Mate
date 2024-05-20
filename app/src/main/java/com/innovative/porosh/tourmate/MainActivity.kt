@@ -1,28 +1,41 @@
 package com.innovative.porosh.tourmate
 
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
 import com.innovative.porosh.tourmate.databinding.ActivityMainBinding
+import com.innovative.porosh.tourmate.userLocation.isLocationPermissionGranted
+import com.innovative.porosh.tourmate.userLocation.requestLocationPermission
+import com.innovative.porosh.tourmate.viewModels.LocationViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var client: FusedLocationProviderClient
+    private val locationViewModel: LocationViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        client = LocationServices.getFusedLocationProviderClient(this)
 
         setSupportActionBar(binding.appBar.toolbar)
 
@@ -44,6 +57,34 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+
+        if (isLocationPermissionGranted(this)){
+            detectUserLocation()
+        }else{
+            requestLocationPermission(this)
+        }
+
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == 999){
+            if (grantResults.contains(PackageManager.PERMISSION_GRANTED)){
+                detectUserLocation()
+            }else{
+                // show a meaningful info in dialog
+            }
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun detectUserLocation() {
+        client.lastLocation.addOnSuccessListener {
+            locationViewModel.setNewLocation(it)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
